@@ -1,0 +1,882 @@
+{
+  "batch": "analyze",
+  "count": 40,
+  "questions": [
+    {
+      "id": "Q051",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team is experiencing cascading failures when one downstream service becomes slow. Requests pile up, exhausting thread pools. Which pattern combination would best address this?",
+      "options": [
+        "Circuit Breaker with Timeout and Bulkhead",
+        "Retry with increased timeout",
+        "API Gateway with caching",
+        "Database per Service with sharding"
+      ],
+      "correct_answer": "Circuit Breaker with Timeout and Bulkhead",
+      "explanation": "Circuit Breaker stops calling failing services, Timeout prevents indefinite waiting, and Bulkhead isolates resources so one failing dependency doesn't exhaust all threads.",
+      "concept_ids": [
+        "CONCEPT-001",
+        "CONCEPT-009"
+      ],
+      "sources": [
+        "Azure Patterns",
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q052",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A startup is building a new product with uncertain requirements. The CTO is debating between microservices and a monolith. What is the strongest argument for starting with a monolith?",
+      "options": [
+        "Service boundaries are hard to define correctly upfront, and refactoring across services is much harder than within a monolith",
+        "Monoliths are always faster",
+        "Microservices require more servers",
+        "Monoliths don't need testing"
+      ],
+      "correct_answer": "Service boundaries are hard to define correctly upfront, and refactoring across services is much harder than within a monolith",
+      "explanation": "Per MonolithFirst, defining correct service boundaries is extremely difficult initially, and refactoring functionality between services is much harder than within a monolith.",
+      "concept_ids": [
+        "CONCEPT-027",
+        "CONCEPT-060"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q053",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "When should you choose Saga with Choreography over Orchestration?",
+      "options": [
+        "When you want loose coupling and services to evolve independently",
+        "When you need a clear visualization of the business process",
+        "When compensating transactions are complex",
+        "When you have a small number of steps"
+      ],
+      "correct_answer": "When you want loose coupling and services to evolve independently",
+      "explanation": "Choreography provides looser coupling as services react to events independently. Orchestration is better when you need clear process visualization or have complex compensation logic.",
+      "concept_ids": [
+        "CONCEPT-002",
+        "CONCEPT-079"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q059",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "An application has a 10:1 read-to-write ratio with complex queries spanning multiple aggregates. Writes require strong consistency. What pattern best addresses this?",
+      "options": [
+        "CQRS with separate read and write models",
+        "Single normalized database",
+        "Event Sourcing only",
+        "Database sharding"
+      ],
+      "correct_answer": "CQRS with separate read and write models",
+      "explanation": "CQRS allows a strongly consistent write model while maintaining optimized, denormalized read models for complex queries. The high read ratio justifies the complexity.",
+      "concept_ids": [
+        "CONCEPT-003"
+      ],
+      "sources": [
+        "Martin Fowler",
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q060",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A legacy monolith has 500K lines of code and 200 database tables. The team wants to extract microservices. What's the most significant risk of using Strangler Fig pattern?",
+      "options": [
+        "Managing data consistency between the legacy system and new services during the transition",
+        "The pattern is too complex to implement",
+        "It requires rewriting all code at once",
+        "Legacy systems cannot coexist with microservices"
+      ],
+      "correct_answer": "Managing data consistency between the legacy system and new services during the transition",
+      "explanation": "During Strangler Fig migration, both systems may need to access or modify the same data, creating consistency challenges that require careful synchronization strategies.",
+      "concept_ids": [
+        "CONCEPT-008"
+      ],
+      "sources": [
+        "Martin Fowler",
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q061",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "When would Event Sourcing be a poor choice despite its benefits?",
+      "options": [
+        "For simple CRUD applications with no audit requirements and a team unfamiliar with event-driven patterns",
+        "When you need a complete audit trail",
+        "When debugging production issues is important",
+        "When you want temporal queries"
+      ],
+      "correct_answer": "For simple CRUD applications with no audit requirements and a team unfamiliar with event-driven patterns",
+      "explanation": "Event Sourcing adds significant complexity. For simple CRUD without audit needs, and when teams lack experience, traditional state-based persistence is more appropriate.",
+      "concept_ids": [
+        "CONCEPT-004"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q062",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team implements aggressive retry logic (10 retries, no backoff) when their downstream payment service is slow. Traffic to the payment service increases 10x. What happened?",
+      "options": [
+        "The retry storm amplified load on the already struggling service, potentially causing complete failure",
+        "The payment service got faster from the practice",
+        "Retries always help reliability",
+        "The retries reduced overall latency"
+      ],
+      "correct_answer": "The retry storm amplified load on the already struggling service, potentially causing complete failure",
+      "explanation": "Aggressive retries without backoff create a 'retry storm' that amplifies load on struggling services, potentially causing complete failure instead of recovery.",
+      "concept_ids": [
+        "CONCEPT-010",
+        "CONCEPT-001"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q065",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A mobile app makes 5 API calls to different microservices on each screen load. Users on cellular networks report slow performance. What pattern would most directly address this?",
+      "options": [
+        "Gateway Aggregation to combine multiple calls into a single request",
+        "Circuit Breaker on each call",
+        "Caching on the client",
+        "Database optimization"
+      ],
+      "correct_answer": "Gateway Aggregation to combine multiple calls into a single request",
+      "explanation": "Gateway Aggregation combines multiple backend calls into one client request, reducing latency on high-latency networks where round-trip time dominates.",
+      "concept_ids": [
+        "CONCEPT-049",
+        "CONCEPT-006"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q066",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "Two teams are building services that both need customer data. Team A wants to call Team B's Customer Service API. Team B suggests sharing the database for performance. What's wrong with sharing the database?",
+      "options": [
+        "It creates tight coupling, preventing independent schema changes and deployments",
+        "Databases can't be shared technically",
+        "It would be too fast",
+        "API calls are always better"
+      ],
+      "correct_answer": "It creates tight coupling, preventing independent schema changes and deployments",
+      "explanation": "Shared databases create tight coupling between services, preventing independent evolution, schema changes, and deployments - violating the Database per Service principle.",
+      "concept_ids": [
+        "CONCEPT-005",
+        "CONCEPT-061"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q069",
+      "skill": "analyze",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team wants to add mTLS, observability, and traffic management to 20 microservices without modifying application code. What should they implement?",
+      "options": [
+        "Service Mesh with sidecar proxies",
+        "API Gateway",
+        "Application-level libraries in each service",
+        "Network policies"
+      ],
+      "correct_answer": "Service Mesh with sidecar proxies",
+      "explanation": "A Service Mesh handles these concerns via sidecar proxies without application code changes, providing uniform security and observability across all services.",
+      "concept_ids": [
+        "CONCEPT-046"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q071",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A Saga has 5 steps. Step 4 fails after steps 1-3 completed successfully. Step 2 sent an email notification. What challenge does this highlight?",
+      "options": [
+        "Some actions (like sending emails) cannot be truly compensated, only mitigated",
+        "Sagas shouldn't have 5 steps",
+        "Email should never be in a Saga",
+        "Step 4 should never fail"
+      ],
+      "correct_answer": "Some actions (like sending emails) cannot be truly compensated, only mitigated",
+      "explanation": "Not all actions are reversible. Sent emails can't be unsent - you can only send a correction email. This is a key challenge when designing Saga compensating transactions.",
+      "concept_ids": [
+        "CONCEPT-002",
+        "CONCEPT-080"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q072",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A company with web, iOS, and Android apps is considering BFF vs single API Gateway. Their mobile apps need different data shapes and smaller payloads than web. What's the best approach?",
+      "options": [
+        "BFF pattern with separate gateways for web and mobile",
+        "Single API Gateway serving all clients",
+        "Direct service calls from clients",
+        "GraphQL for all clients"
+      ],
+      "correct_answer": "BFF pattern with separate gateways for web and mobile",
+      "explanation": "When different clients have significantly different requirements (data shapes, payload sizes), BFF allows optimizing each gateway for its specific client type.",
+      "concept_ids": [
+        "CONCEPT-007"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q076",
+      "skill": "analyze",
+      "topic": "technical_debt",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team is planning a complete rewrite of their system 'because the code is too messy.' What consideration from Sacrificial Architecture suggests this might be appropriate?",
+      "options": [
+        "The system was designed for 10x current scale, and they're approaching 100x",
+        "The code has some bugs",
+        "The team doesn't like the programming language",
+        "A new framework is available"
+      ],
+      "correct_answer": "The system was designed for 10x current scale, and they're approaching 100x",
+      "explanation": "Sacrificial Architecture acknowledges systems designed for one scale may not suit another. Google's principle: design for 10X growth, plan to rewrite before 100X.",
+      "concept_ids": [
+        "CONCEPT-028"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q078",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "An organization integrated with a legacy ERP system whose data model pollutes their domain model. New code increasingly mirrors legacy concepts. What pattern should they have applied?",
+      "options": [
+        "Anti-Corruption Layer to translate between legacy and new domain models",
+        "Shared database",
+        "Direct integration",
+        "Complete replacement"
+      ],
+      "correct_answer": "Anti-Corruption Layer to translate between legacy and new domain models",
+      "explanation": "An Anti-Corruption Layer translates between systems with different semantics, preventing legacy models from corrupting the design of new applications.",
+      "concept_ids": [
+        "CONCEPT-015"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q080",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A company's microservices team structure mirrors their organizational structure per Conway's Law. They want to change the architecture but can't restructure teams. What's a likely outcome?",
+      "options": [
+        "The new architecture will drift back toward the team structure over time",
+        "Architecture will change teams automatically",
+        "Conway's Law doesn't apply to microservices",
+        "Teams don't affect architecture"
+      ],
+      "correct_answer": "The new architecture will drift back toward the team structure over time",
+      "explanation": "Conway's Law suggests systems reflect organizational communication structures. Without changing team structure, the architecture will naturally drift to match teams.",
+      "concept_ids": [
+        "CONCEPT-043"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q081",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A public API has 3 active versions (v1, v2, v3). v1 has 1000 users, v2 has 100, v3 is latest. Which version should be prioritized for deprecation?",
+      "options": [
+        "v2, as it has fewer users and is between stable versions",
+        "v1, as it's oldest",
+        "v3, as it's newest",
+        "Deprecate all at once"
+      ],
+      "correct_answer": "v2, as it has fewer users and is between stable versions",
+      "explanation": "v2 with fewest users minimizes migration impact. Users likely should migrate to v3. v1's larger user base makes it harder to deprecate first.",
+      "concept_ids": [
+        "CONCEPT-057",
+        "CONCEPT-068"
+      ],
+      "sources": [
+        "ADRs",
+        "Kubernetes KEPs"
+      ]
+    },
+    {
+      "id": "Q082",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A distributed system has logs in each service but debugging cross-service issues takes hours. What's the most impactful improvement?",
+      "options": [
+        "Implement distributed tracing with correlation IDs across all services",
+        "Add more logging",
+        "Centralize logs without correlation",
+        "Debug each service separately"
+      ],
+      "correct_answer": "Implement distributed tracing with correlation IDs across all services",
+      "explanation": "Distributed tracing with correlation IDs enables following a single request across all services, dramatically reducing time to debug cross-service issues.",
+      "concept_ids": [
+        "CONCEPT-020",
+        "CONCEPT-021"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q084",
+      "skill": "analyze",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team deploys 10 times per day using GitOps. They accidentally deploy a broken config. The rollback process takes 30 minutes. What should they improve?",
+      "options": [
+        "Automate rollback to previous Git commit, which should be instant with GitOps",
+        "Deploy less frequently",
+        "Add more approvals",
+        "Stop using GitOps"
+      ],
+      "correct_answer": "Automate rollback to previous Git commit, which should be instant with GitOps",
+      "explanation": "With GitOps, rollback should be as simple as reverting to a previous Git commit. If it takes 30 minutes, they're not leveraging GitOps' declarative rollback capability.",
+      "concept_ids": [
+        "CONCEPT-036"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q085",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team's JWT tokens are valid for 24 hours. When a user's access is revoked, they can still access the system until token expiration. What's the trade-off they accepted?",
+      "options": [
+        "Stateless authentication simplicity versus immediate revocation capability",
+        "Longer tokens are more secure",
+        "JWT doesn't support revocation",
+        "24 hours is the minimum"
+      ],
+      "correct_answer": "Stateless authentication simplicity versus immediate revocation capability",
+      "explanation": "JWT's stateless nature means no central session to invalidate. Short-lived tokens or token blacklists (adding state) are needed for quick revocation.",
+      "concept_ids": [
+        "CONCEPT-059"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q086",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A company uses Consumer-Driven Contract Testing. A provider team wants to add a required field to an API response. Existing consumer tests would break. What should happen?",
+      "options": [
+        "Coordinate with consumers first, update contracts, then make the change",
+        "Make the change and let consumers adapt",
+        "Delete the contract tests",
+        "Add the field as optional instead"
+      ],
+      "correct_answer": "Coordinate with consumers first, update contracts, then make the change",
+      "explanation": "Contract tests exist to catch breaking changes. The failing test is working correctly - it detected a breaking change. Consumers must be coordinated before changes.",
+      "concept_ids": [
+        "CONCEPT-083"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q087",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "An API Gateway handles authentication, rate limiting, and routing. Response times have increased by 50ms. Where is the latency coming from?",
+      "options": [
+        "The additional network hop and processing at the gateway layer",
+        "Database queries",
+        "Service processing",
+        "Network cables"
+      ],
+      "correct_answer": "The additional network hop and processing at the gateway layer",
+      "explanation": "API Gateways add latency through the extra network hop and processing for features like auth and rate limiting. This is a known trade-off for centralized concerns.",
+      "concept_ids": [
+        "CONCEPT-006"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q088",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A team implements throttling that returns HTTP 429 when rate limits are exceeded. Their mobile app crashes when receiving 429s. What did the mobile team do wrong?",
+      "options": [
+        "Failed to implement proper error handling for rate limit responses",
+        "Server-side throttling is wrong",
+        "HTTP 429 is not a valid status code",
+        "Mobile apps shouldn't be throttled"
+      ],
+      "correct_answer": "Failed to implement proper error handling for rate limit responses",
+      "explanation": "Clients must handle throttling responses (429) gracefully, typically implementing backoff and retry. Crashing indicates missing error handling for this expected scenario.",
+      "concept_ids": [
+        "CONCEPT-011"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q090",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A Saga uses orchestration. The orchestrator becomes a bottleneck and single point of failure. How can this be mitigated while keeping orchestration benefits?",
+      "options": [
+        "Run multiple orchestrator instances with leader election or partitioned sagas",
+        "Switch to choreography",
+        "Use bigger servers",
+        "Remove the Saga pattern"
+      ],
+      "correct_answer": "Run multiple orchestrator instances with leader election or partitioned sagas",
+      "explanation": "Multiple orchestrator instances with leader election or saga partitioning by key provide scalability and redundancy while maintaining orchestration's clear process visibility.",
+      "concept_ids": [
+        "CONCEPT-002",
+        "CONCEPT-047"
+      ],
+      "sources": [
+        "microservices.io",
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q091",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team's post-mortem after an outage focuses on who made the mistake that caused it. Engineers are hesitant to admit errors. What's wrong with this approach?",
+      "options": [
+        "Blame culture discourages honest reporting and prevents learning about systemic issues",
+        "Someone should be blamed",
+        "Post-mortems should be shorter",
+        "Only major outages need post-mortems"
+      ],
+      "correct_answer": "Blame culture discourages honest reporting and prevents learning about systemic issues",
+      "explanation": "Blameless post-mortems focus on systemic improvements. Blame culture makes people hide mistakes, preventing the organization from learning and improving.",
+      "concept_ids": [
+        "CONCEPT-070"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q092",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A monolith uses a library for tax calculation. When migrating to microservices, should tax calculation be a separate service?",
+      "options": [
+        "Not necessarily - if it's a pure calculation with no state, a shared library may be more appropriate",
+        "Yes, everything should be a service",
+        "No, always use libraries",
+        "Depends on the programming language"
+      ],
+      "correct_answer": "Not necessarily - if it's a pure calculation with no state, a shared library may be more appropriate",
+      "explanation": "Pure functions with no state don't require the overhead of a service. The Microservice Premium should be justified - not everything needs to be a service.",
+      "concept_ids": [
+        "CONCEPT-060"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q093",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A sharded database uses customer ID for sharding. A new requirement needs queries across all customers. What challenge does this create?",
+      "options": [
+        "Cross-shard queries require scatter-gather across all shards, significantly impacting performance",
+        "Sharding prevents all cross-customer queries",
+        "Customer ID was wrong for sharding",
+        "Add more shards"
+      ],
+      "correct_answer": "Cross-shard queries require scatter-gather across all shards, significantly impacting performance",
+      "explanation": "Sharding optimizes queries within a shard. Cross-shard queries require scatter-gather across all shards, which is expensive. This is a key sharding trade-off.",
+      "concept_ids": [
+        "CONCEPT-048"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q094",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "An application serves global users. US users report fast response times while EU users report slowness. What's the most likely architectural issue?",
+      "options": [
+        "Application deployed only in US region, causing high latency for EU users",
+        "EU has slower internet",
+        "EU users have older devices",
+        "Time zone issues"
+      ],
+      "correct_answer": "Application deployed only in US region, causing high latency for EU users",
+      "explanation": "Single-region deployment creates high latency for distant users. Multi-region deployment or CDN for static content would reduce EU latency.",
+      "concept_ids": [
+        "CONCEPT-032"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q095",
+      "skill": "analyze",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A CI pipeline runs all tests on every commit, taking 45 minutes. Developers push directly to main because feature branch testing is too slow. What's the impact?",
+      "options": [
+        "Broken commits reach main more often because fast feedback loop is lost",
+        "Testing becomes more thorough",
+        "Deployment is faster",
+        "This is the correct approach"
+      ],
+      "correct_answer": "Broken commits reach main more often because fast feedback loop is lost",
+      "explanation": "Slow CI breaks the fast feedback loop that makes CI effective. Developers bypassing it means broken code reaches main, defeating CI's purpose.",
+      "concept_ids": [
+        "CONCEPT-052"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q097",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A service handles both real-time API requests and batch reporting. During batch jobs, API latency spikes. What pattern would help?",
+      "options": [
+        "Bulkhead pattern to isolate resources for API vs batch processing",
+        "Disable batch processing",
+        "Add more servers",
+        "Optimize the batch job"
+      ],
+      "correct_answer": "Bulkhead pattern to isolate resources for API vs batch processing",
+      "explanation": "Bulkhead isolates resources (thread pools, connections) so batch processing can't starve API requests. Each has its own resource partition.",
+      "concept_ids": [
+        "CONCEPT-009"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q098",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "free_response",
+      "question": "A team is decomposing a monolith into microservices. They're debating between decomposing by business capability vs. by subdomain. What factors should guide this decision?",
+      "correct_answer": "Choose decomposition by business capability when: aligning services with what the business does to generate value, team structure mirrors business functions, clear business ownership exists. Choose subdomain decomposition when: applying DDD principles, domain is complex with core/supporting/generic classification, need to identify strategic differentiators. Both approaches often align; key is deep understanding of both business and domain.",
+      "explanation": "Both approaches can work; they often overlap. Business capability aligns with organization, subdomain with domain complexity. Success requires business understanding either way.",
+      "concept_ids": [
+        "CONCEPT-016",
+        "CONCEPT-017"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q099",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A gRPC-based microservices system needs to expose APIs to browser-based web clients. gRPC-Web has limitations. What's the typical solution?",
+      "options": [
+        "API Gateway that translates REST/HTTP to gRPC for internal services",
+        "Rewrite all services in REST",
+        "Force browsers to use gRPC",
+        "Use WebSockets for everything"
+      ],
+      "correct_answer": "API Gateway that translates REST/HTTP to gRPC for internal services",
+      "explanation": "An API Gateway can expose REST/HTTP to external clients while using efficient gRPC for internal service communication, bridging the browser limitation.",
+      "concept_ids": [
+        "CONCEPT-006",
+        "CONCEPT-076"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q100",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team has 500 alert rules. On-call engineers are overwhelmed with notifications, many of which don't require action. What's the most impactful improvement?",
+      "options": [
+        "Review and reduce alerts to only actionable items, implementing proper alert hierarchy",
+        "Add more on-call engineers",
+        "Increase alert thresholds everywhere",
+        "Disable alerting"
+      ],
+      "correct_answer": "Review and reduce alerts to only actionable items, implementing proper alert hierarchy",
+      "explanation": "Alert fatigue from non-actionable alerts causes real issues to be missed. Reducing to actionable alerts improves signal-to-noise and on-call effectiveness.",
+      "concept_ids": [
+        "CONCEPT-021"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q101",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "question": "Compare the trade-offs between using a synchronous API composition pattern versus CQRS for queries spanning multiple services.",
+      "correct_answer": "API Composition: Simpler implementation, real-time data, but increased latency (multiple calls), reduced availability (depends on all services), and complex aggregation logic. CQRS: Optimized read models with faster queries, but eventual consistency, increased complexity (separate read/write models), and data synchronization overhead. Choose API Composition for simpler queries with strong consistency needs. Choose CQRS for complex queries, high read:write ratios, or when eventual consistency is acceptable.",
+      "explanation": "The choice depends on consistency requirements, query complexity, read:write ratio, and team capacity to manage CQRS complexity.",
+      "concept_ids": [
+        "CONCEPT-003",
+        "CONCEPT-063"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q102",
+      "skill": "analyze",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team using Kubernetes notices their Service load balancing is uneven - some pods get 80% of traffic. What's likely happening?",
+      "options": [
+        "Long-lived connections prevent even distribution; need connection draining or service mesh",
+        "Kubernetes load balancing is broken",
+        "Some pods are faster",
+        "Labels are wrong"
+      ],
+      "correct_answer": "Long-lived connections prevent even distribution; need connection draining or service mesh",
+      "explanation": "Kubernetes Service uses connection-level load balancing. Long-lived connections (gRPC, WebSocket) stay on initial pods. Request-level balancing needs service mesh or client-side LB.",
+      "concept_ids": [
+        "CONCEPT-046"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q104",
+      "skill": "analyze",
+      "topic": "technical_debt",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team categorizes their technical debt using the Technical Debt Quadrant. Which quadrant represents the worst kind of debt?",
+      "options": [
+        "Reckless and Inadvertent - 'We didn't know we were taking on debt'",
+        "Prudent and Deliberate",
+        "Reckless and Deliberate",
+        "Prudent and Inadvertent"
+      ],
+      "correct_answer": "Reckless and Inadvertent - 'We didn't know we were taking on debt'",
+      "explanation": "Reckless/Inadvertent debt (not knowing best practices) is worst because the team doesn't even recognize they're accumulating debt, so they can't plan to address it.",
+      "concept_ids": [
+        "CONCEPT-029"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q105",
+      "skill": "analyze",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "free_response",
+      "question": "Explain why refactoring functionality between services is harder than within a monolith, as stated in the MonolithFirst recommendation.",
+      "correct_answer": "Within a monolith: refactoring is a local code change with IDE support, tests run together, deployment is atomic, and rollback is simple. Between services: refactoring requires changing APIs (breaking consumers), coordinating deployments, maintaining backward compatibility during transition, dealing with distributed data movement, handling network failures, and managing potentially different languages/technologies. The distributed nature transforms a code refactoring into an architectural and operational challenge.",
+      "explanation": "Service boundaries create hard contracts. Moving functionality requires API versioning, data migration, coordinated deployments, and handling distributed system challenges.",
+      "concept_ids": [
+        "CONCEPT-027",
+        "CONCEPT-060"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q106",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team implemented Queue-Based Load Leveling for their batch processing system. The queue keeps growing even during low-traffic periods. What's the likely issue?",
+      "options": [
+        "Consumer processing rate is lower than average message production rate",
+        "The queue is too small",
+        "Messages are too large",
+        "The pattern is wrong for batch processing"
+      ],
+      "correct_answer": "Consumer processing rate is lower than average message production rate",
+      "explanation": "If the queue grows continuously, consumers can't keep up with producers even at average rates. Either add consumers or optimize processing.",
+      "concept_ids": [
+        "CONCEPT-012"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q108",
+      "skill": "analyze",
+      "topic": "cloud_deployment",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "A team uses blue-green deployment. Their database schema changed in the green environment. After switching traffic, they need to rollback. Why is this problematic?",
+      "options": [
+        "Database schema changes may not be backward compatible, preventing rollback to blue",
+        "Blue-green doesn't support databases",
+        "Rollback is always instant",
+        "Schema changes are automatic"
+      ],
+      "correct_answer": "Database schema changes may not be backward compatible, preventing rollback to blue",
+      "explanation": "Blue-green works well for stateless services. Database schema migrations can break backward compatibility, making the 'blue' version unable to work with the new schema.",
+      "concept_ids": [
+        "CONCEPT-054"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q109",
+      "skill": "analyze",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "A team stores configuration in environment variables. They need to update a config value across 50 service instances. What's the operational challenge?",
+      "options": [
+        "Environment variable changes require restarting all instances, causing potential downtime",
+        "Environment variables can't be changed",
+        "50 instances is too many",
+        "Configuration should be in code"
+      ],
+      "correct_answer": "Environment variable changes require restarting all instances, causing potential downtime",
+      "explanation": "Environment variables are read at startup. Changes require restarts or rolling deployments. An external configuration store enables runtime updates without restarts.",
+      "concept_ids": [
+        "CONCEPT-081"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q110",
+      "skill": "analyze",
+      "topic": "quality_attributes",
+      "difficulty": "hard",
+      "format": "free_response",
+      "question": "A system needs to handle a flash sale event where traffic might spike 100x for 1 hour. Analyze the trade-offs between pre-provisioning capacity versus auto-scaling.",
+      "correct_answer": "Pre-provisioning: Guaranteed capacity for spike, no scaling lag, but expensive for idle time (99%+ of hours), wastes resources. Auto-scaling: Cost-effective for normal operations, but scaling lag may miss initial spike, cold starts affect performance, may not scale fast enough for 100x spike, need to test actual scaling behavior. Hybrid approach often best: pre-scale some capacity before known event, enable aggressive auto-scaling for additional demand, scale down afterward. For known events, pre-provisioning often wins on reliability.",
+      "explanation": "Known, extreme spikes often justify pre-provisioning cost. Unknown spikes need auto-scaling. The 100x magnitude and known timing favor pre-provisioning here.",
+      "concept_ids": [
+        "CONCEPT-040",
+        "CONCEPT-039"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    }
+  ]
+}

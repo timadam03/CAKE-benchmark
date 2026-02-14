@@ -1,0 +1,915 @@
+{
+  "batch": "recall",
+  "count": 41,
+  "questions": [
+    {
+      "id": "Q001",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What are the three states of a Circuit Breaker pattern?",
+      "options": [
+        "Open, Closed, Half-Open",
+        "Active, Inactive, Pending",
+        "Running, Stopped, Paused",
+        "Connected, Disconnected, Reconnecting"
+      ],
+      "correct_answer": "Open, Closed, Half-Open",
+      "explanation": "The Circuit Breaker pattern uses three states: Closed (normal operation), Open (blocking requests after failures exceed threshold), and Half-Open (testing if service has recovered).",
+      "concept_ids": [
+        "CONCEPT-001"
+      ],
+      "sources": [
+        "microservices.io",
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q002",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What does CQRS stand for?",
+      "options": [
+        "Command Query Responsibility Segregation",
+        "Concurrent Query Response System",
+        "Central Query Routing Service",
+        "Command Queue Read Separation"
+      ],
+      "correct_answer": "Command Query Responsibility Segregation",
+      "explanation": "CQRS (Command Query Responsibility Segregation) separates read and write models, enabling independent optimization and scaling of each.",
+      "concept_ids": [
+        "CONCEPT-003"
+      ],
+      "sources": [
+        "Martin Fowler",
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q003",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What does RTO stand for in disaster recovery?",
+      "options": [
+        "Recovery Time Objective",
+        "Real-Time Operations",
+        "Rollback Transaction Order",
+        "Resource Timeout Option"
+      ],
+      "correct_answer": "Recovery Time Objective",
+      "explanation": "RTO (Recovery Time Objective) is the maximum acceptable downtime after a disaster before business impact becomes unacceptable.",
+      "concept_ids": [
+        "CONCEPT-034"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q004",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "Which pattern persists state as a sequence of immutable events rather than current state?",
+      "options": [
+        "Event Sourcing",
+        "CQRS",
+        "Saga",
+        "Outbox"
+      ],
+      "correct_answer": "Event Sourcing",
+      "explanation": "Event Sourcing persists business entities as a sequence of state-changing events, enabling complete audit trails, temporal queries, and event replay.",
+      "concept_ids": [
+        "CONCEPT-004"
+      ],
+      "sources": [
+        "Martin Fowler",
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q005",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is Conway's Law about?",
+      "options": [
+        "Organizations design systems that mirror their communication structure",
+        "Systems should be designed for maximum performance",
+        "All microservices should be the same size",
+        "Databases should be normalized to third normal form"
+      ],
+      "correct_answer": "Organizations design systems that mirror their communication structure",
+      "explanation": "Conway's Law states that organizations design systems that mirror their communication structure, meaning team structure influences system architecture.",
+      "concept_ids": [
+        "CONCEPT-043"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q007",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What pattern uses a queue as a buffer between producers and consumers to smooth load spikes?",
+      "options": [
+        "Queue-Based Load Leveling",
+        "Circuit Breaker",
+        "Bulkhead",
+        "Throttling"
+      ],
+      "correct_answer": "Queue-Based Load Leveling",
+      "explanation": "Queue-Based Load Leveling uses a queue to buffer requests, allowing consumers to process at their own pace regardless of producer load.",
+      "concept_ids": [
+        "CONCEPT-012"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q008",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What does the Strangler Fig pattern help with?",
+      "options": [
+        "Incrementally migrating legacy systems to new architecture",
+        "Improving database performance",
+        "Implementing authentication",
+        "Scaling horizontally"
+      ],
+      "correct_answer": "Incrementally migrating legacy systems to new architecture",
+      "explanation": "The Strangler Fig pattern enables incremental migration of legacy systems by building new functionality alongside the old system and gradually transferring traffic.",
+      "concept_ids": [
+        "CONCEPT-008"
+      ],
+      "sources": [
+        "Martin Fowler",
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q009",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is Infrastructure as Code (IaC)?",
+      "options": [
+        "Managing infrastructure through code and automation",
+        "Writing application code for cloud",
+        "Coding inside virtual machines",
+        "Using code editors in the cloud"
+      ],
+      "correct_answer": "Managing infrastructure through code and automation",
+      "explanation": "Infrastructure as Code (IaC) is the practice of defining and managing infrastructure through code, enabling version control, testing, and reproducibility.",
+      "concept_ids": [
+        "CONCEPT-035"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q010",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What security principle grants only the minimum permissions necessary for a task?",
+      "options": [
+        "Principle of Least Privilege",
+        "Defense in Depth",
+        "Zero Trust",
+        "Separation of Duties"
+      ],
+      "correct_answer": "Principle of Least Privilege",
+      "explanation": "The Principle of Least Privilege grants only the minimum permissions necessary to perform a task, reducing attack surface and potential damage.",
+      "concept_ids": [
+        "CONCEPT-030"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q011",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "In the Saga pattern, what are compensating transactions used for?",
+      "options": [
+        "Undoing the effects of previous transactions when rollback is needed",
+        "Speeding up transaction processing",
+        "Combining multiple transactions into one",
+        "Logging transaction history"
+      ],
+      "correct_answer": "Undoing the effects of previous transactions when rollback is needed",
+      "explanation": "Compensating transactions in a Saga undo the effects of previously completed local transactions when a later step fails and rollback is required.",
+      "concept_ids": [
+        "CONCEPT-002",
+        "CONCEPT-080"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q012",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "In Domain-Driven Design, what are the three types of subdomains?",
+      "options": [
+        "Core, Supporting, Generic",
+        "Primary, Secondary, Tertiary",
+        "Main, Helper, Utility",
+        "Business, Technical, Infrastructure"
+      ],
+      "correct_answer": "Core, Supporting, Generic",
+      "explanation": "DDD classifies subdomains as Core (key differentiators), Supporting (related but not differentiating), and Generic (business-agnostic, suitable for off-the-shelf solutions).",
+      "concept_ids": [
+        "CONCEPT-017"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q015",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the Bulkhead pattern named after?",
+      "options": [
+        "Ship compartments that prevent total flooding",
+        "Building support structures",
+        "Electronic circuit components",
+        "Bridge construction elements"
+      ],
+      "correct_answer": "Ship compartments that prevent total flooding",
+      "explanation": "The Bulkhead pattern is named after ship compartments that prevent total flooding if one section is compromised, similarly isolating failures in software.",
+      "concept_ids": [
+        "CONCEPT-009"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q016",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is a Service Mesh?",
+      "options": [
+        "Infrastructure layer handling service-to-service communication with sidecar proxies",
+        "A network of microservices",
+        "A type of container orchestration",
+        "A load balancing algorithm"
+      ],
+      "correct_answer": "Infrastructure layer handling service-to-service communication with sidecar proxies",
+      "explanation": "A Service Mesh is an infrastructure layer that handles service-to-service communication with features like mTLS, traffic management, and observability via sidecar proxies.",
+      "concept_ids": [
+        "CONCEPT-046"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q017",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the difference between Sidecar and Ambassador patterns?",
+      "options": [
+        "Sidecar is co-located for general functionality; Ambassador specifically handles outbound connectivity",
+        "They are identical patterns with different names",
+        "Sidecar is for databases; Ambassador is for APIs",
+        "Ambassador is older; Sidecar is the modern version"
+      ],
+      "correct_answer": "Sidecar is co-located for general functionality; Ambassador specifically handles outbound connectivity",
+      "explanation": "Sidecar provides general supporting functionality co-located with the main app, while Ambassador specifically proxies outbound connectivity features like circuit breaking and routing.",
+      "concept_ids": [
+        "CONCEPT-013",
+        "CONCEPT-014"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q019",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is a Bounded Context in Domain-Driven Design?",
+      "options": [
+        "A boundary where domain terms have specific, consistent meanings",
+        "A limit on the size of a microservice",
+        "A container for database transactions",
+        "A security perimeter around services"
+      ],
+      "correct_answer": "A boundary where domain terms have specific, consistent meanings",
+      "explanation": "A Bounded Context is a DDD pattern that divides large domain models into segments with explicit boundaries where terms have specific, consistent meanings.",
+      "concept_ids": [
+        "CONCEPT-018"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q021",
+      "skill": "recall",
+      "topic": "technical_debt",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "According to the Technical Debt metaphor, what represents 'interest payments'?",
+      "options": [
+        "Extra effort required to add new features due to poor code quality",
+        "Actual financial costs of development",
+        "Time spent in meetings",
+        "Server maintenance costs"
+      ],
+      "correct_answer": "Extra effort required to add new features due to poor code quality",
+      "explanation": "In the Technical Debt metaphor, interest payments are the extra effort required to add features or fix bugs due to suboptimal code quality.",
+      "concept_ids": [
+        "CONCEPT-029"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q022",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the 'Microservice Premium'?",
+      "options": [
+        "The overhead cost of managing multiple services compared to a monolith",
+        "A pricing model for microservice platforms",
+        "Premium features in microservice frameworks",
+        "Extra performance from microservices"
+      ],
+      "correct_answer": "The overhead cost of managing multiple services compared to a monolith",
+      "explanation": "The Microservice Premium is the additional overhead (complexity, operational cost) of managing multiple services compared to a monolith.",
+      "concept_ids": [
+        "CONCEPT-060"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q023",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is an Idempotent Consumer?",
+      "options": [
+        "A consumer that produces the same result when processing the same message multiple times",
+        "A consumer that only processes unique messages",
+        "A consumer that consumes messages in order",
+        "A consumer that never fails"
+      ],
+      "correct_answer": "A consumer that produces the same result when processing the same message multiple times",
+      "explanation": "An Idempotent Consumer can safely process the same message multiple times while producing the same result, handling message redelivery gracefully.",
+      "concept_ids": [
+        "CONCEPT-024"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q024",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is the main benefit of serverless deployment?",
+      "options": [
+        "No infrastructure management required",
+        "Guaranteed lowest cost",
+        "Fastest execution speed",
+        "Unlimited execution time"
+      ],
+      "correct_answer": "No infrastructure management required",
+      "explanation": "Serverless deployment eliminates infrastructure management, allowing developers to focus on code while the platform handles scaling and billing per-use.",
+      "concept_ids": [
+        "CONCEPT-026"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q025",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is a Health Check API used for?",
+      "options": [
+        "Reporting service's ability to handle requests for routing and self-healing decisions",
+        "Checking developer health",
+        "Monitoring server hardware",
+        "Validating API schemas"
+      ],
+      "correct_answer": "Reporting service's ability to handle requests for routing and self-healing decisions",
+      "explanation": "A Health Check API returns whether a service can handle requests, used by platforms for routing decisions and triggering self-healing actions.",
+      "concept_ids": [
+        "CONCEPT-022"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q027",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is GitOps?",
+      "options": [
+        "Using Git as single source of truth for infrastructure with automated synchronization",
+        "Using Git for code versioning",
+        "Operating systems for Git servers",
+        "Git operations in production"
+      ],
+      "correct_answer": "Using Git as single source of truth for infrastructure with automated synchronization",
+      "explanation": "GitOps uses Git as the single source of truth for declarative infrastructure and applications, with automated synchronization to live environments.",
+      "concept_ids": [
+        "CONCEPT-036"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q028",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "According to CAP theorem, what three properties cannot all be guaranteed simultaneously?",
+      "options": [
+        "Consistency, Availability, Partition tolerance",
+        "Capacity, Agility, Performance",
+        "Cost, Accuracy, Precision",
+        "Compliance, Auditing, Privacy"
+      ],
+      "correct_answer": "Consistency, Availability, Partition tolerance",
+      "explanation": "CAP theorem states that a distributed system can only guarantee two of three properties: Consistency, Availability, and Partition tolerance.",
+      "concept_ids": [
+        "CONCEPT-041"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q029",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is Chaos Engineering?",
+      "options": [
+        "Deliberately injecting failures to test system resilience",
+        "Managing chaotic development processes",
+        "Debugging complex systems",
+        "Random code refactoring"
+      ],
+      "correct_answer": "Deliberately injecting failures to test system resilience",
+      "explanation": "Chaos Engineering deliberately injects failures into systems to test resilience and discover weaknesses before they cause production incidents.",
+      "concept_ids": [
+        "CONCEPT-037"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q030",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is the 'Database per Service' pattern?",
+      "options": [
+        "Each microservice owns and manages its private database",
+        "One database shared across all services",
+        "Multiple databases per service",
+        "No databases in microservices"
+      ],
+      "correct_answer": "Each microservice owns and manages its private database",
+      "explanation": "Database per Service means each microservice owns its private database, accessible only through its API, enabling loose coupling and polyglot persistence.",
+      "concept_ids": [
+        "CONCEPT-005"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q031",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is Polyglot Persistence?",
+      "options": [
+        "Using different database technologies for different services based on their needs",
+        "Storing data in multiple languages",
+        "Using a single database that supports multiple query languages",
+        "Persisting code in multiple programming languages"
+      ],
+      "correct_answer": "Using different database technologies for different services based on their needs",
+      "explanation": "Polyglot Persistence uses different database technologies optimized for different services' needs rather than a single shared database for all.",
+      "concept_ids": [
+        "CONCEPT-045"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    },
+    {
+      "id": "Q032",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is Blue-Green Deployment?",
+      "options": [
+        "Maintaining two production environments and switching traffic between them",
+        "Using blue and green colored servers",
+        "Deploying to staging then production",
+        "A type of container deployment"
+      ],
+      "correct_answer": "Maintaining two production environments and switching traffic between them",
+      "explanation": "Blue-Green Deployment maintains two production environments (blue and green), deploys to the inactive one, then switches traffic for instant rollback capability.",
+      "concept_ids": [
+        "CONCEPT-054"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q033",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is Canary Deployment?",
+      "options": [
+        "Gradually rolling out changes to a subset of users before full deployment",
+        "Deploying to test environments first",
+        "Using canary servers for testing",
+        "A type of blue-green deployment"
+      ],
+      "correct_answer": "Gradually rolling out changes to a subset of users before full deployment",
+      "explanation": "Canary Deployment gradually rolls out changes to a small subset of users, detecting issues with limited blast radius before full deployment.",
+      "concept_ids": [
+        "CONCEPT-055"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q034",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is an API Gateway?",
+      "options": [
+        "A single entry point that routes requests to appropriate backend services",
+        "A database for API definitions",
+        "A tool for generating API documentation",
+        "A testing framework for APIs"
+      ],
+      "correct_answer": "A single entry point that routes requests to appropriate backend services",
+      "explanation": "An API Gateway is a single entry point that routes requests to backend services, providing protocol translation, authentication, and response aggregation.",
+      "concept_ids": [
+        "CONCEPT-006"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q035",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the Anti-Corruption Layer pattern used for?",
+      "options": [
+        "Translating between systems with different semantics to prevent legacy models from corrupting new designs",
+        "Preventing data corruption in databases",
+        "Encrypting data in transit",
+        "Validating input data"
+      ],
+      "correct_answer": "Translating between systems with different semantics to prevent legacy models from corrupting new designs",
+      "explanation": "The Anti-Corruption Layer translates between systems with different semantics, preventing legacy or external system models from corrupting new application design.",
+      "concept_ids": [
+        "CONCEPT-015"
+      ],
+      "sources": [
+        "Azure Patterns",
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q037",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "What problem does Two-Phase Commit (2PC) solve, and why is it problematic for microservices?",
+      "options": [
+        "Ensures distributed transaction atomicity but blocks and reduces availability",
+        "Improves query performance but increases complexity",
+        "Enables service discovery but requires central coordinator",
+        "Provides encryption but slows communication"
+      ],
+      "correct_answer": "Ensures distributed transaction atomicity but blocks and reduces availability",
+      "explanation": "2PC ensures all participants in a distributed transaction commit or abort together, but it's blocking and reduces availability, making it problematic for microservices.",
+      "concept_ids": [
+        "CONCEPT-044"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q038",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is Eventual Consistency?",
+      "options": [
+        "Guarantee that reads will eventually return the last updated value if no new updates are made",
+        "Immediate consistency across all replicas",
+        "Consistency that eventually fails",
+        "A weaker form of ACID consistency"
+      ],
+      "correct_answer": "Guarantee that reads will eventually return the last updated value if no new updates are made",
+      "explanation": "Eventual Consistency guarantees that if no new updates are made, eventually all reads will return the last updated value, trading immediate consistency for availability.",
+      "concept_ids": [
+        "CONCEPT-042"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q039",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is Service Discovery?",
+      "options": [
+        "Mechanism for services to find network locations of other services",
+        "Finding new microservices to implement",
+        "Discovering service documentation",
+        "A testing technique"
+      ],
+      "correct_answer": "Mechanism for services to find network locations of other services",
+      "explanation": "Service Discovery is a mechanism for services to find network locations of other services, using client-side, server-side, or DNS-based approaches.",
+      "concept_ids": [
+        "CONCEPT-077"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q040",
+      "skill": "recall",
+      "topic": "technical_debt",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What does Semantic Versioning's MAJOR version number indicate?",
+      "options": [
+        "Breaking changes that may require modifications to dependent code",
+        "New features with backward compatibility",
+        "Bug fixes only",
+        "Documentation updates"
+      ],
+      "correct_answer": "Breaking changes that may require modifications to dependent code",
+      "explanation": "In Semantic Versioning (MAJOR.MINOR.PATCH), incrementing MAJOR indicates breaking changes that may require modifications to dependent code.",
+      "concept_ids": [
+        "CONCEPT-082"
+      ],
+      "sources": [
+        "ADRs"
+      ]
+    },
+    {
+      "id": "Q041",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the 'Shared Database' anti-pattern?",
+      "options": [
+        "Multiple services sharing a single database, creating tight coupling",
+        "Using a database that supports sharing",
+        "Sharing database credentials",
+        "Having backup databases"
+      ],
+      "correct_answer": "Multiple services sharing a single database, creating tight coupling",
+      "explanation": "The Shared Database anti-pattern occurs when multiple services share a single database, creating tight coupling and preventing independent evolution.",
+      "concept_ids": [
+        "CONCEPT-061"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q042",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the Backend for Frontend (BFF) pattern?",
+      "options": [
+        "Separate API gateways optimized for each client type (web, mobile, etc.)",
+        "Frontend code that runs on backend servers",
+        "Backend services for frontend developers",
+        "A frontend testing framework"
+      ],
+      "correct_answer": "Separate API gateways optimized for each client type (web, mobile, etc.)",
+      "explanation": "Backend for Frontend (BFF) creates separate API gateways for each client type (web, mobile, third-party), each providing an optimized API.",
+      "concept_ids": [
+        "CONCEPT-007"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q043",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is Distributed Tracing?",
+      "options": [
+        "Tracking requests across services using unique correlation IDs",
+        "Distributing trace files across servers",
+        "Tracing network routes",
+        "Debugging distributed systems offline"
+      ],
+      "correct_answer": "Tracking requests across services using unique correlation IDs",
+      "explanation": "Distributed Tracing assigns unique IDs to requests, passes them through all services, and records details for end-to-end visibility and debugging.",
+      "concept_ids": [
+        "CONCEPT-020"
+      ],
+      "sources": [
+        "microservices.io"
+      ]
+    },
+    {
+      "id": "Q044",
+      "skill": "recall",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "mcq",
+      "question": "What is Auto Scaling?",
+      "options": [
+        "Automatically adjusting compute capacity based on demand",
+        "Scaling images automatically",
+        "Automatic schema scaling",
+        "Self-scaling containers"
+      ],
+      "correct_answer": "Automatically adjusting compute capacity based on demand",
+      "explanation": "Auto Scaling automatically adjusts compute capacity based on demand metrics to maintain performance while optimizing costs.",
+      "concept_ids": [
+        "CONCEPT-040"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q045",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "What is the Valet Key pattern?",
+      "options": [
+        "Issuing time-limited tokens for direct resource access without going through the application",
+        "A pattern for key management",
+        "Storing keys in valet services",
+        "Using service accounts"
+      ],
+      "correct_answer": "Issuing time-limited tokens for direct resource access without going through the application",
+      "explanation": "The Valet Key pattern issues time-limited tokens providing direct access to specific resources, allowing clients to bypass the application for storage operations.",
+      "concept_ids": [
+        "CONCEPT-050"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q046",
+      "skill": "recall",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is a Blameless Post-Mortem?",
+      "options": [
+        "Incident review focused on systemic improvements rather than individual blame",
+        "Post-mortem with no conclusions",
+        "Review without documentation",
+        "Anonymous incident reviews"
+      ],
+      "correct_answer": "Incident review focused on systemic improvements rather than individual blame",
+      "explanation": "Blameless Post-Mortems focus on systemic improvements rather than individual blame, encouraging honest reporting and organizational learning.",
+      "concept_ids": [
+        "CONCEPT-070"
+      ],
+      "sources": [
+        "AWS Well-Architected"
+      ]
+    },
+    {
+      "id": "Q048",
+      "skill": "recall",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "mcq",
+      "question": "What is the Competing Consumers pattern?",
+      "options": [
+        "Multiple consumers pulling from the same queue with each message going to one consumer",
+        "Consumers competing for resources",
+        "Consumer load balancing",
+        "Priority-based consumption"
+      ],
+      "correct_answer": "Multiple consumers pulling from the same queue with each message going to one consumer",
+      "explanation": "Competing Consumers has multiple consumer instances pulling from the same queue, with the messaging system ensuring each message goes to only one consumer.",
+      "concept_ids": [
+        "CONCEPT-051"
+      ],
+      "sources": [
+        "Azure Patterns"
+      ]
+    },
+    {
+      "id": "Q049",
+      "skill": "recall",
+      "topic": "decomposition",
+      "difficulty": "hard",
+      "format": "mcq",
+      "question": "What is Martin Fowler's 'MonolithFirst' recommendation?",
+      "options": [
+        "Start with a monolith to discover service boundaries before adopting microservices",
+        "Always use monoliths",
+        "Build microservices first, then merge into monolith",
+        "Monoliths are faster than microservices"
+      ],
+      "correct_answer": "Start with a monolith to discover service boundaries before adopting microservices",
+      "explanation": "MonolithFirst recommends starting with a monolith even for complex applications to discover proper service boundaries before committing to distributed architecture.",
+      "concept_ids": [
+        "CONCEPT-027"
+      ],
+      "sources": [
+        "Martin Fowler"
+      ]
+    }
+  ]
+}

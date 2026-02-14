@@ -1,0 +1,469 @@
+{
+  "batch": 4,
+  "count": 28,
+  "questions": [
+    {
+      "id": "Q163",
+      "question": "Given this Saga orchestrator pseudocode, identify and fix the bug:\n\n```python\nclass OrderSaga:\n    def execute(self):\n        try:\n            self.reserve_inventory()\n            self.charge_payment()\n            self.ship_order()\n        except PaymentError:\n            self.release_inventory()\n        except ShippingError:\n            self.refund_payment()\n```\n\nWhat compensating transactions are missing?",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-019"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "ShippingError handler should also release inventory. Need proper ordering: release_inventory() then refund_payment() for ShippingError."
+    },
+    {
+      "id": "Q164",
+      "question": "Which Terraform configuration correctly implements auto-scaling for an AWS service?\n\nA)\n```hcl\nresource \"aws_autoscaling_group\" \"web\" {\n  min_size = 2\n  max_size = 10\n  target_tracking_configuration {\n    predefined_metric_specification {\n      predefined_metric_type = \"ASGAverageCPUUtilization\"\n    }\n    target_value = 70.0\n  }\n}\n```\n\nB)\n```hcl\nresource \"aws_autoscaling_group\" \"web\" {\n  min_size = 2\n  max_size = 10\n}\nresource \"aws_autoscaling_policy\" \"scale\" {\n  autoscaling_group_name = aws_autoscaling_group.web.name\n  policy_type = \"TargetTrackingScaling\"\n  target_tracking_configuration {\n    predefined_metric_specification {\n      predefined_metric_type = \"ASGAverageCPUUtilization\"\n    }\n    target_value = 70.0\n  }\n}\n```\n\nC)\n```hcl\nresource \"aws_autoscaling_group\" \"web\" {\n  min_size = 2\n  max_size = 10\n  scaling_policy = \"cpu_70\"\n}\n```\n\nD)\n```hcl\nresource \"aws_launch_template\" \"web\" {\n  auto_scale = true\n  cpu_threshold = 70\n}\n```",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-053"
+      ],
+      "source": "aws_wellarchitected",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "B is correct. Auto-scaling policies must be separate resources in Terraform, linked to the ASG via autoscaling_group_name."
+    },
+    {
+      "id": "Q167",
+      "question": "Complete the Event Sourcing aggregate implementation:\n\n```python\nclass BankAccount:\n    def __init__(self, account_id):\n        self.account_id = account_id\n        self.balance = 0\n        self.events = []\n    \n    def apply_event(self, event):\n        # TODO: Apply event to update state\n        pass\n    \n    def deposit(self, amount):\n        # TODO: Create and apply event\n        pass\n    \n    def withdraw(self, amount):\n        # TODO: Create and apply event, handle insufficient funds\n        pass\n    \n    def replay_events(self, events):\n        # TODO: Rebuild state from event history\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-021"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "apply_event should pattern match on event type and update balance. deposit/withdraw create event dicts with type/amount, append to events list, call apply_event. replay_events iterates and applies each event."
+    },
+    {
+      "id": "Q168",
+      "question": "Which Docker Compose configuration correctly implements the Sidecar pattern for log aggregation?\n\nA)\n```yaml\nservices:\n  app:\n    image: myapp:latest\n    volumes:\n      - logs:/var/log/app\n  log-shipper:\n    image: fluentd:latest\n    volumes:\n      - logs:/var/log/app:ro\nvolumes:\n  logs:\n```\n\nB)\n```yaml\nservices:\n  app:\n    image: myapp:latest\n    logging:\n      driver: fluentd\n```\n\nC)\n```yaml\nservices:\n  app:\n    image: myapp:latest\n    depends_on:\n      - log-shipper\n  log-shipper:\n    image: fluentd:latest\n    network_mode: host\n```\n\nD)\n```yaml\nservices:\n  app:\n    image: myapp:latest\n    sidecar:\n      image: fluentd:latest\n```",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-044",
+        "CONCEPT-067"
+      ],
+      "source": "azure_patterns",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "A",
+      "explanation": "A correctly implements sidecar pattern with shared volume for log access. B uses Docker logging driver (different pattern). C doesn't share data. D uses invalid syntax."
+    },
+    {
+      "id": "Q169",
+      "question": "Implement a basic API Gateway rate limiter using Redis:\n\n```python\nimport redis\nimport time\n\nclass RateLimiter:\n    def __init__(self, redis_client, requests_per_minute=60):\n        self.redis = redis_client\n        self.limit = requests_per_minute\n    \n    def is_allowed(self, client_id: str) -> bool:\n        # TODO: Implement sliding window rate limiting\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-030",
+        "CONCEPT-046"
+      ],
+      "source": "azure_patterns",
+      "expected_answer": "Use Redis sorted set with timestamp scores. Add current timestamp, remove entries older than window, count remaining entries, compare against limit."
+    },
+    {
+      "id": "Q170",
+      "question": "What's wrong with this health check endpoint implementation?\n\n```python\n@app.get('/health')\nasync def health_check():\n    # Check database\n    db_healthy = await check_database()\n    # Check cache\n    cache_healthy = await check_cache()\n    # Check external API\n    api_healthy = await check_external_api()\n    \n    if db_healthy and cache_healthy and api_healthy:\n        return {'status': 'healthy'}\n    return {'status': 'unhealthy'}, 503\n```\n\nA) Health checks should be synchronous\nB) Should not check external dependencies in liveness probe\nC) Missing timeout handling for dependency checks\nD) Both B and C",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-066",
+        "CONCEPT-010"
+      ],
+      "source": "microservices_io",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "D",
+      "explanation": "External API failures shouldn't make the service appear unhealthy (use separate readiness probe). All checks need timeouts to prevent health endpoint from hanging."
+    },
+    {
+      "id": "Q172",
+      "question": "Complete the CQRS command handler:\n\n```python\nclass CreateOrderCommand:\n    def __init__(self, order_id, customer_id, items):\n        self.order_id = order_id\n        self.customer_id = customer_id\n        self.items = items\n\nclass CreateOrderHandler:\n    def __init__(self, event_store, event_publisher):\n        self.event_store = event_store\n        self.event_publisher = event_publisher\n    \n    def handle(self, command: CreateOrderCommand):\n        # TODO: Validate, create event, store, and publish\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-020"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "Validate command data, create OrderCreatedEvent with command data, persist to event_store, publish via event_publisher, return success/event_id."
+    },
+    {
+      "id": "Q173",
+      "question": "Identify the security vulnerability in this API endpoint:\n\n```python\n@app.post('/api/orders/{order_id}/update')\nasync def update_order(order_id: str, request: Request):\n    data = await request.json()\n    order = await db.orders.find_one({'_id': order_id})\n    if not order:\n        raise HTTPException(404)\n    \n    await db.orders.update_one(\n        {'_id': order_id},\n        {'$set': data}\n    )\n    return {'status': 'updated'}\n```\n\nA) SQL injection vulnerability\nB) Missing authentication check\nC) Mass assignment vulnerability - no field whitelist\nD) Both B and C",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-004",
+        "CONCEPT-005"
+      ],
+      "source": "aws_wellarchitected",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "D",
+      "explanation": "No auth check (anyone can update any order) and mass assignment (attacker can modify any field including price, status). Should verify ownership and whitelist updatable fields."
+    },
+    {
+      "id": "Q174",
+      "question": "Implement the Strangler Fig pattern for migrating a legacy endpoint. Complete the proxy:\n\n```python\nclass StranglerProxy:\n    def __init__(self, legacy_url, new_service_url):\n        self.legacy_url = legacy_url\n        self.new_service_url = new_service_url\n        self.migrated_endpoints = set()\n    \n    async def route_request(self, method, path, body=None, headers=None):\n        # TODO: Route to new service if migrated, otherwise to legacy\n        pass\n    \n    def mark_migrated(self, path_pattern):\n        # TODO: Mark an endpoint as migrated\n        pass\n```",
+      "skill": "implement",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-041",
+        "CONCEPT-082"
+      ],
+      "source": "fowler",
+      "expected_answer": "route_request checks if path matches any migrated_endpoints patterns, forwards to new_service_url if matched, legacy_url otherwise. mark_migrated adds pattern to set."
+    },
+    {
+      "id": "Q175",
+      "question": "Which OpenTelemetry instrumentation correctly propagates trace context?\n\nA)\n```python\nfrom opentelemetry import trace\n\ntracer = trace.get_tracer(__name__)\nwith tracer.start_as_current_span('my-operation'):\n    response = requests.get(url)\n```\n\nB)\n```python\nfrom opentelemetry import trace\nfrom opentelemetry.propagate import inject\n\ntracer = trace.get_tracer(__name__)\nwith tracer.start_as_current_span('my-operation'):\n    headers = {}\n    inject(headers)\n    response = requests.get(url, headers=headers)\n```\n\nC)\n```python\nimport requests\nresponse = requests.get(url)\nresponse.headers['trace-id'] = generate_trace_id()\n```\n\nD)\n```python\nfrom opentelemetry import trace\ntracer = trace.get_tracer(__name__)\nspan = tracer.start_span('my-operation')\nresponse = requests.get(url)\nspan.end()\n```",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "hard",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-068"
+      ],
+      "source": "microservices_io",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "B correctly injects trace context into outgoing request headers using OpenTelemetry's propagate.inject(). A creates span but doesn't propagate context. C is completely wrong. D doesn't use context manager or propagate."
+    },
+    {
+      "id": "Q177",
+      "question": "What's the bug in this distributed lock implementation?\n\n```python\nimport redis\nimport uuid\n\nclass DistributedLock:\n    def __init__(self, redis_client, lock_name, ttl=30):\n        self.redis = redis_client\n        self.lock_name = lock_name\n        self.ttl = ttl\n        self.lock_id = str(uuid.uuid4())\n    \n    def acquire(self):\n        return self.redis.set(self.lock_name, self.lock_id, nx=True, ex=self.ttl)\n    \n    def release(self):\n        self.redis.delete(self.lock_name)\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-074"
+      ],
+      "source": "azure_patterns",
+      "expected_answer": "Release doesn't verify lock ownership - could delete another process's lock. Should use Lua script or WATCH/MULTI to atomically check lock_id matches before deleting."
+    },
+    {
+      "id": "Q178",
+      "question": "Complete the Bulkhead pattern implementation using semaphores:\n\n```python\nimport asyncio\nfrom typing import Dict\n\nclass BulkheadManager:\n    def __init__(self):\n        self.bulkheads: Dict[str, asyncio.Semaphore] = {}\n    \n    def register_bulkhead(self, name: str, max_concurrent: int):\n        # TODO: Create semaphore for this bulkhead\n        pass\n    \n    async def execute(self, bulkhead_name: str, func, *args, **kwargs):\n        # TODO: Execute function within bulkhead limits\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-027"
+      ],
+      "source": "azure_patterns",
+      "expected_answer": "register_bulkhead creates Semaphore(max_concurrent) in dict. execute uses 'async with self.bulkheads[bulkhead_name]' to acquire semaphore, then awaits func(*args, **kwargs)."
+    },
+    {
+      "id": "Q179",
+      "question": "Which Prometheus metrics configuration correctly tracks HTTP request latency with proper labels?\n\nA)\n```python\nfrom prometheus_client import Counter\nrequest_count = Counter('http_requests', 'Total requests')\n```\n\nB)\n```python\nfrom prometheus_client import Histogram\nrequest_latency = Histogram(\n    'http_request_duration_seconds',\n    'Request latency',\n    ['method', 'endpoint', 'status'],\n    buckets=[.005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10]\n)\n```\n\nC)\n```python\nfrom prometheus_client import Gauge\nrequest_latency = Gauge('http_request_latency', 'Current latency')\n```\n\nD)\n```python\nfrom prometheus_client import Summary\nrequest_latency = Summary(\n    'http_request_duration',\n    'Request latency',\n    ['user_id', 'session_id']\n)\n```",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-065",
+        "CONCEPT-009"
+      ],
+      "source": "microservices_io",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "B uses Histogram (correct for latency), has appropriate labels (method, endpoint, status), uses _seconds suffix convention, and defines useful buckets. D has high-cardinality labels (user_id) which is bad practice."
+    },
+    {
+      "id": "Q181",
+      "question": "Write the Kubernetes NetworkPolicy YAML to:\n- Allow ingress only from pods with label 'app: frontend'\n- Allow egress only to pods with label 'app: database' on port 5432\n- Deny all other traffic",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-004",
+        "CONCEPT-055"
+      ],
+      "source": "kubernetes_keps",
+      "expected_answer": "NetworkPolicy with podSelector, policyTypes [Ingress, Egress], ingress rule with from podSelector matching app:frontend, egress rule with to podSelector matching app:database and ports [5432]."
+    },
+    {
+      "id": "Q182",
+      "question": "What's wrong with this service mesh configuration for canary deployment?\n\n```yaml\napiVersion: networking.istio.io/v1beta1\nkind: VirtualService\nmetadata:\n  name: my-service\nspec:\n  hosts:\n  - my-service\n  http:\n  - route:\n    - destination:\n        host: my-service\n        subset: v1\n      weight: 90\n    - destination:\n        host: my-service\n        subset: v2\n      weight: 10\n---\napiVersion: networking.istio.io/v1beta1\nkind: DestinationRule\nmetadata:\n  name: my-service\nspec:\n  host: my-service\n  subsets:\n  - name: v1\n    labels:\n      version: v1\n  - name: v2\n    labels:\n      version: v2\n```\n\nA) VirtualService syntax is incorrect\nB) Missing traffic mirroring for safety\nC) No health check or automatic rollback\nD) Weights should add to 100%",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-059",
+        "CONCEPT-057"
+      ],
+      "source": "real_adrs",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "C",
+      "explanation": "Configuration is syntactically correct and weights sum to 100%. The issue is no automated health monitoring or rollback mechanism - canary could fail and continue receiving traffic."
+    },
+    {
+      "id": "Q184",
+      "question": "Which AWS CloudFormation snippet correctly configures an SQS dead-letter queue?\n\nA)\n```yaml\nMainQueue:\n  Type: AWS::SQS::Queue\n  Properties:\n    DeadLetterQueue: !Ref DLQ\nDLQ:\n  Type: AWS::SQS::Queue\n```\n\nB)\n```yaml\nMainQueue:\n  Type: AWS::SQS::Queue\n  Properties:\n    RedrivePolicy:\n      deadLetterTargetArn: !GetAtt DLQ.Arn\n      maxReceiveCount: 3\nDLQ:\n  Type: AWS::SQS::Queue\n```\n\nC)\n```yaml\nMainQueue:\n  Type: AWS::SQS::Queue\nDLQ:\n  Type: AWS::SQS::Queue\n  Properties:\n    SourceQueue: !Ref MainQueue\n```\n\nD)\n```yaml\nMainQueue:\n  Type: AWS::SQS::Queue\n  Properties:\n    RedrivePolicy:\n      targetQueue: DLQ\n      retries: 3\n```",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-028",
+        "CONCEPT-053"
+      ],
+      "source": "aws_wellarchitected",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "B uses correct RedrivePolicy syntax with deadLetterTargetArn (requires ARN, not ref) and maxReceiveCount. Other options use incorrect property names or structures."
+    },
+    {
+      "id": "Q186",
+      "question": "Fix the race condition in this cache-aside implementation:\n\n```python\nclass CacheAside:\n    def __init__(self, cache, database):\n        self.cache = cache\n        self.db = database\n    \n    async def get(self, key):\n        value = await self.cache.get(key)\n        if value is None:\n            value = await self.db.get(key)\n            await self.cache.set(key, value)\n        return value\n    \n    async def update(self, key, value):\n        await self.db.update(key, value)\n        await self.cache.delete(key)\n```\n\nWhat's the race condition and how would you fix it?",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-074"
+      ],
+      "source": "azure_patterns",
+      "expected_answer": "Race: Thread A reads stale from DB, Thread B updates DB and deletes cache, Thread A writes stale value to cache. Fix: Use cache.delete() before db.update(), or use distributed locking, or add TTL to cached values."
+    },
+    {
+      "id": "Q188",
+      "question": "Which gRPC interceptor correctly implements request timeout propagation?\n\nA)\n```python\ndef timeout_interceptor(request, context, next):\n    context.set_deadline(time.time() + 30)\n    return next(request, context)\n```\n\nB)\n```python\ndef timeout_interceptor(continuation, client_call_details, request):\n    remaining = client_call_details.timeout\n    if remaining and remaining > 0:\n        new_details = client_call_details._replace(\n            timeout=remaining - PROCESSING_TIME\n        )\n        return continuation(new_details, request)\n    return continuation(client_call_details, request)\n```\n\nC)\n```python\ndef timeout_interceptor(request, context, next):\n    try:\n        return next(request, context)\n    except TimeoutError:\n        return None\n```\n\nD)\n```python\ndef timeout_interceptor(request, context):\n    request.timeout = 30\n    return request\n```",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "hard",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-029",
+        "CONCEPT-068"
+      ],
+      "source": "microservices_io",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "B correctly propagates remaining deadline minus processing time to downstream calls. A sets fixed deadline (doesn't propagate). C just catches errors. D modifies request incorrectly."
+    },
+    {
+      "id": "Q190",
+      "question": "What's wrong with this database migration approach?\n\n```sql\n-- Migration V1: Add new column\nALTER TABLE orders ADD COLUMN customer_email VARCHAR(255);\n\n-- Update application code to use new column\n-- Deploy new application version\n\n-- Migration V2: Remove old column\nALTER TABLE orders DROP COLUMN customer_id;\n```\n\nA) Should use transactions for DDL\nB) Missing backwards compatibility - V2 should come after all instances updated\nC) Should rename instead of add/drop\nD) VARCHAR is wrong type for email",
+      "skill": "implement",
+      "topic": "technical_debt",
+      "difficulty": "medium",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-080",
+        "CONCEPT-082"
+      ],
+      "source": "fowler",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "explanation": "During rolling deployment, old instances still need customer_id. Correct pattern: V1 adds column, deploy app that writes to both, V2 backfills data, V3 removes old column after all instances updated."
+    },
+    {
+      "id": "Q191",
+      "question": "Complete the BFF (Backend for Frontend) implementation:\n\n```python\nclass MobileBFF:\n    def __init__(self, user_service, order_service, product_service):\n        self.users = user_service\n        self.orders = order_service\n        self.products = product_service\n    \n    async def get_home_screen_data(self, user_id: str) -> dict:\n        # TODO: Aggregate data optimized for mobile home screen\n        # Should include: user profile summary, recent orders (last 3),\n        # recommended products (limit 5)\n        # Optimize for minimal payload size\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-047"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "Use asyncio.gather to fetch user, orders, products in parallel. Transform responses to include only needed fields (name not full profile, order summary not details, product thumbnails not full images). Return combined dict."
+    },
+    {
+      "id": "Q192",
+      "question": "Implement idempotency key handling for a payment API:\n\n```python\nclass PaymentService:\n    def __init__(self, db, payment_gateway):\n        self.db = db\n        self.gateway = payment_gateway\n    \n    async def process_payment(self, idempotency_key: str, amount: float, \n                              customer_id: str) -> dict:\n        # TODO: Implement idempotent payment processing\n        # - Check if request was already processed\n        # - If yes, return cached result\n        # - If no, process and store result\n        # - Handle in-progress requests\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-074"
+      ],
+      "source": "real_adrs",
+      "expected_answer": "Check db for idempotency_key. If exists with status='completed', return stored result. If status='in_progress', return 409 or wait. If not exists, insert with status='in_progress', call gateway, update with result and status='completed', return result. Use transaction/lock."
+    },
+    {
+      "id": "Q193",
+      "question": "Which AWS IAM policy follows least privilege for a Lambda function that reads from S3 and writes to DynamoDB?\n\nA)\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Action\": \"*\",\n  \"Resource\": \"*\"\n}\n```\n\nB)\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Action\": [\"s3:*\", \"dynamodb:*\"],\n  \"Resource\": \"*\"\n}\n```\n\nC)\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Action\": [\"s3:GetObject\", \"dynamodb:PutItem\"],\n  \"Resource\": [\n    \"arn:aws:s3:::my-bucket/*\",\n    \"arn:aws:dynamodb:us-east-1:123456789:table/my-table\"\n  ]\n}\n```\n\nD)\n```json\n{\n  \"Effect\": \"Allow\",\n  \"Action\": [\"s3:GetObject\", \"dynamodb:PutItem\"],\n  \"Resource\": \"*\"\n}\n```",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "easy",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-005"
+      ],
+      "source": "aws_wellarchitected",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "C",
+      "explanation": "C specifies exact actions needed (GetObject for read, PutItem for write) and restricts to specific resources. Others are overly permissive."
+    },
+    {
+      "id": "Q194",
+      "question": "Implement a simple message deduplication handler:\n\n```python\nfrom datetime import datetime, timedelta\n\nclass MessageDeduplicator:\n    def __init__(self, redis_client, dedup_window_minutes=60):\n        self.redis = redis_client\n        self.window = dedup_window_minutes\n    \n    async def is_duplicate(self, message_id: str) -> bool:\n        # TODO: Check if message was seen within dedup window\n        pass\n    \n    async def mark_processed(self, message_id: str):\n        # TODO: Record message as processed\n        pass\n    \n    async def process_if_new(self, message_id: str, handler_func):\n        # TODO: Only process if not duplicate\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "easy",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-028"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "is_duplicate: return await redis.exists(f'dedup:{message_id}'). mark_processed: await redis.setex(f'dedup:{message_id}', window*60, '1'). process_if_new: if not await is_duplicate, call handler_func, then mark_processed."
+    },
+    {
+      "id": "Q195",
+      "question": "Fix the observability gap in this async task processor:\n\n```python\nasync def process_task(task):\n    result = await heavy_computation(task.data)\n    await save_result(task.id, result)\n    return result\n\nasync def worker():\n    while True:\n        task = await queue.get()\n        try:\n            await process_task(task)\n        except Exception:\n            pass\n        finally:\n            queue.task_done()\n```\n\nAdd proper logging, metrics, and tracing.",
+      "skill": "implement",
+      "topic": "quality_attributes",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-065",
+        "CONCEPT-066",
+        "CONCEPT-068"
+      ],
+      "source": "microservices_io",
+      "expected_answer": "Add: structured logging with task_id/status, try/except with logger.exception(), metrics for tasks_processed/failed/duration histogram, span creation with task context, propagate trace_id if present in task."
+    },
+    {
+      "id": "Q196",
+      "question": "Implement a configuration-driven feature toggle system:\n\n```yaml\n# config.yaml\nfeatures:\n  new_checkout:\n    enabled: true\n    rollout_percentage: 25\n    whitelist_users: [\"user123\", \"user456\"]\n    blacklist_users: []\n```\n\n```python\nclass FeatureConfig:\n    def __init__(self, config_path: str):\n        # TODO: Load and parse config\n        pass\n    \n    def is_feature_enabled(self, feature_name: str, user_id: str = None) -> bool:\n        # TODO: Evaluate feature for user\n        pass\n```",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-059"
+      ],
+      "source": "fowler",
+      "expected_answer": "Load YAML in __init__. is_feature_enabled: get feature config, check enabled flag, if user_id in blacklist return False, if in whitelist return True, else hash(user_id) % 100 < rollout_percentage."
+    },
+    {
+      "id": "Q197",
+      "question": "What is the issue with this Kubernetes resource configuration?\n\n```yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: critical-service\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app: critical-service\n  template:\n    metadata:\n      labels:\n        app: critical-service\n    spec:\n      containers:\n      - name: app\n        image: myapp:latest\n        resources:\n          requests:\n            memory: \"64Mi\"\n            cpu: \"250m\"\n```\n\nA) Missing liveness and readiness probes\nB) Single replica for critical service has no redundancy\nC) Using :latest tag is not reproducible\nD) All of the above",
+      "skill": "implement",
+      "topic": "cloud_deployment",
+      "difficulty": "easy",
+      "format": "mcq",
+      "concepts": [
+        "CONCEPT-055",
+        "CONCEPT-010"
+      ],
+      "source": "kubernetes_keps",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "D",
+      "explanation": "All issues: no probes means K8s can't detect unhealthy pods, single replica means no HA, :latest tag is unpredictable. Also missing resource limits."
+    },
+    {
+      "id": "Q199",
+      "question": "Complete this ADR template for choosing between REST and gRPC:\n\n```markdown\n# ADR-XXX: API Protocol for Inter-Service Communication\n\n## Status\n[TODO]\n\n## Context\nWe need to choose an API protocol for communication between our microservices.\nCurrent services: Order, Inventory, Payment, Notification\nRequirements: Low latency (<10ms p99), type safety, streaming for notifications\n\n## Decision\n[TODO - Choose and justify]\n\n## Consequences\n[TODO - List positive and negative consequences]\n```",
+      "skill": "implement",
+      "topic": "decomposition",
+      "difficulty": "medium",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-079",
+        "CONCEPT-029"
+      ],
+      "source": "real_adrs",
+      "expected_answer": "Status: Proposed/Accepted. Decision: gRPC for internal services due to latency requirements, type safety via protobuf, native streaming support. Consequences: (+) Performance, type safety, streaming; (-) Debugging harder, need protobuf tooling, team learning curve, REST gateway needed for external clients."
+    },
+    {
+      "id": "Q200",
+      "question": "Implement a basic leader election mechanism using Redis:\n\n```python\nimport redis\nimport asyncio\nfrom typing import Optional, Callable\n\nclass LeaderElection:\n    def __init__(self, redis_client, election_key: str, \n                 instance_id: str, ttl_seconds: int = 30):\n        self.redis = redis_client\n        self.key = election_key\n        self.instance_id = instance_id\n        self.ttl = ttl_seconds\n        self.is_leader = False\n    \n    async def try_become_leader(self) -> bool:\n        # TODO: Attempt to acquire leadership\n        pass\n    \n    async def renew_leadership(self) -> bool:\n        # TODO: Extend TTL if still leader\n        pass\n    \n    async def resign(self):\n        # TODO: Give up leadership\n        pass\n    \n    async def leader_loop(self, on_leader: Callable, on_follower: Callable):\n        # TODO: Continuously try to become/stay leader\n        pass\n```",
+      "skill": "implement",
+      "topic": "architectural_patterns",
+      "difficulty": "hard",
+      "format": "free_response",
+      "concepts": [
+        "CONCEPT-074"
+      ],
+      "source": "azure_patterns",
+      "expected_answer": "try_become_leader: SET key instance_id NX EX ttl, return success. renew_leadership: check if current value == instance_id, if yes EXPIRE/SET with new ttl, else return false. resign: check ownership then DELETE. leader_loop: while True, if is_leader try renew else try become, call appropriate callback, sleep ttl/3."
+    }
+  ]
+}
