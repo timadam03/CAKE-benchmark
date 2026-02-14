@@ -16,12 +16,12 @@ The complete question bank: 200 questions across four cognitive levels and five 
 
 ### CAKE-Core (128 questions)
 
-A quality-filtered subset of CAKE-Full. A question is included if it meets all of the following criteria based on independent expert annotations:
+A quality-filtered subset of CAKE-Full. A question is included if it meets all of the following criteria based on independent expert annotations (excluding admin):
 
 - Mean correctness >= 4.0 (out of 5)
-- Mean clarity >= 4.0 (out of 5)
-- No ambiguity flags
-- No typo flags
+- Minimum clarity >= 4 (every expert rated clarity at least 4)
+- No ambiguity flags from any expert
+- No typo flags from any expert
 
 CAKE-Core is the recommended subset for benchmarking, as it controls for question quality variation.
 
@@ -30,10 +30,12 @@ CAKE-Core is the recommended subset for benchmarking, as it controls for questio
 | Cognitive Level | MCQ | Free-response | CAKE-Full | CAKE-Core |
 |-----------------|-----|---------------|-----------|-----------|
 | Recall          | 50  | 0             | 50        | 41        |
-| Analyze         | 48  | 12            | 60        | 40        |
-| Design          | 22  | 28            | 50        | 19        |
-| Implement       | 10  | 18            | 40        | 28        |
-| **Total**       | **130** | **58**    | **200**   | **128**   |
+| Analyze         | 56  | 4             | 60        | 40        |
+| Design          | 24  | 26            | 50        | 19        |
+| Implement       | 12  | 28            | 40        | 28        |
+| **Total**       | **142** | **58**    | **200**   | **128**   |
+
+Note: 12 implement-level MCQs were excluded from the paper's evaluation due to a formatting defect, reducing the evaluated MCQ set to 130.
 
 **Topics**: architectural patterns, quality attributes, decomposition strategies, cloud deployment, technical debt.
 
