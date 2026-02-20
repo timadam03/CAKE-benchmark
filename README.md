@@ -10,11 +10,11 @@ Companion repository for the paper:
 
 ## Benchmark Variants
 
-### CAKE-Full (200 questions)
+### CAKE-Full (188 questions)
 
-The complete question bank: 200 questions across four cognitive levels and five cloud-native topics. Of these, 188 were used in the paper's evaluation (12 implement-level MCQs were excluded due to a formatting defect in the options array; see Section V of the paper).
+The complete question bank: 188 questions across four cognitive levels and five cloud-native topics. 12 MCQ-Implement questions were excluded due to formatting issues, see Section V-C of the paper.
 
-### CAKE-Core (128 questions)
+### CAKE-Core (116 questions)
 
 A quality-filtered subset of CAKE-Full. A question is included if it meets all of the following criteria based on independent expert annotations (excluding admin):
 
@@ -27,13 +27,13 @@ CAKE-Core is the recommended subset for benchmarking, as it controls for questio
 
 ## Dataset Overview
 
-| Cognitive Level | MCQ | Free-response | CAKE-Full | CAKE-Core |
-|-----------------|-----|---------------|-----------|-----------|
-| Recall          | 50  | 0             | 50        | 41        |
-| Analyze         | 56  | 4             | 60        | 40        |
-| Design          | 24  | 26            | 50        | 19        |
-| Implement       | 12  | 28            | 40        | 28        |
-| **Total**       | **142** | **58**    | **200**   | **128**   |
+| Cognitive Level | MCQ     | Free-response | CAKE-Full | CAKE-Core |
+|-----------------|---------|---------------|-----------|-----------|
+| Recall          | 50      | 0             | 50        | 41        |
+| Analyze         | 56      | 4             | 60        | 40        |
+| Design          | 24      | 26            | 50        | 19        |
+| Implement       | 0       | 28            | 28        | 16        |
+| **Total**       | **130** | **58**        | **188**   | **116**   |
 
 Note: 12 implement-level MCQs were excluded from the paper's evaluation due to a formatting defect, reducing the evaluated MCQ set to 130.
 
@@ -42,19 +42,10 @@ Note: 12 implement-level MCQs were excluded from the paper's evaluation due to a
 ## Structure
 
 ```
-questions/
-├── full/                               CAKE-Full (200 questions)
-│   ├── questions_batch1_recall.json
-│   ├── questions_batch2_analyze.json
-│   ├── questions_batch3_design.json
-│   └── questions_batch4_implement.json
+CAKE-questions/
+├── CAKE-Core.json                      Core CAKE-benchmark (116 questions)
 │
-└── core/                               CAKE-Core (128 questions)
-    ├── questions_batch1_recall.json
-    ├── questions_batch2_analyze.json
-    ├── questions_batch3_design.json
-    └── questions_batch4_implement.json
-```
+└── CAKE-Full.json                      Full CAKE-benchmark (188 questions)
 
 ## Question Format
 
