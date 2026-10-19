@@ -8,6 +8,8 @@ Companion repository for the paper:
 >
 > Centre for Industrial Software, University of Southern Denmark
 
+**Project page:** [aiml-sdu.github.io/cake](https://aiml-sdu.github.io/cake/) has an interactive summary of the benchmark, sample questions and results for all 22 model configurations.
+
 ## Benchmark Variants
 
 ### CAKE-Full (188 questions)
